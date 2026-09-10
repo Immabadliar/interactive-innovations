@@ -1,0 +1,35 @@
+{
+  "_comment": "Add a team member by dropping in their Roblox userId. Username, display name and avatar are pulled live from Roblox - no image needed. Fill in whichever socials apply; leave the rest as empty strings and they won't render.",
+  "team": [
+    {
+      "userId": 50288942,
+      "role": "Founder/CEO",
+      "tagline": "Let's build.",
+      "socials": {
+        "discord": "jab.owns",
+        "tiktok": "https://www.tiktok.com/@jab_owns",
+        "roblox": "https://www.roblox.com/users/50288942/profile",
+        "twitter": "",
+        "youtube": "",
+        "github": "",
+        "website": ""
+      }
+      
+    },
+    {
+      "userId": 3693921145,
+      "role": "CTO",
+      "tagline": "Tech man.",
+      "socials": {
+        "discord": "uh_luca",
+        "tiktok": "https://www.tiktok.com/@immabadliar_",
+        "roblox": "https://www.roblox.com/users/3693921145/profile",
+        "twitter": "https://x.com/itsken0bi_",
+        "youtube": "",
+        "github": "",
+        "website": ""
+      }
+      
+    }
+  ]
+}

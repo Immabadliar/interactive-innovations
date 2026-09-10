@@ -1,0 +1,25 @@
+{
+  "studio": {
+    "name": "Interactive Innovations",
+    "shortName": "Interactive Innovations",
+    "tagline": "Where interactive ideas innovate.",
+    "description": "An investment-driven Roblox studio building, scaling, and reinvesting in immersive experiences.",
+    "established": 2026,
+    "logo": "assets/images/logo.png",
+    "icon": "assets/images/icon.png"
+  },
+  "contact": {
+    "formspreeEndpoint": "https://formspree.io/f/xvkodlob",
+    "discordInvite": "https://discord.gg/ZGVKX9kSMC",
+    "discordTag": "Our dicord server"
+  },
+  "socials": {
+    "tiktok": "https://www.tiktok.com/@jab_owns",
+    "discord": "https://discord.gg/ZGVKX9kSMC"
+  },
+  "live": {
+    "ccuRefreshSeconds": 45,
+    "metaCacheMinutes": 60,
+    "ccuCacheSeconds": 25
+  }
+}

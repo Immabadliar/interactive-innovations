@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Innovations | Where interactive ideas innovate.</title>
+  <meta name="description" content="An investment-driven Roblox studio building, scaling, and reinvesting in immersive experiences.">
+  <meta name="theme-color" content="#06080f">
+  <meta property="og:title" content="Interactive Innovations">
+  <meta property="og:description" content="An investment-driven Roblox studio building, scaling, and reinvesting in immersive experiences.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/images/icon.png" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="assets/images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://thumbnails.roproxy.com" crossorigin>
+  <link rel="preconnect" href="https://games.roproxy.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="loader" role="status" aria-label="Loading">
+    <div style="text-align:center">
+      <img src="assets/images/logo.png" alt="Interactive Innovations" data-logo>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="#/" aria-label="Interactive Innovations home">
+        <img src="assets/images/logo.png" alt="" data-logo>
+        <b data-studio-name>Interactive Innovations</b>
+      </a>
+      <nav class="nav" id="nav">
+        <a class="nav__link" href="#/">Home</a>
+        <a class="nav__link" href="#/games">Games</a>
+        <a class="nav__link" href="#/about">About</a>
+        <a class="nav__link" href="#/team">Team</a>
+        <a class="btn btn--primary nav__cta" href="#/contact">Work with us
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </nav>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container" id="app"><!-- views render here --></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__about">
+          <a href="#/" aria-label="Home"><img src="assets/images/logo.png" alt="Interactive Innovations" data-logo></a>
+          <p><span data-tagline>Where interactive ideas innovate.</span></p>
+          <div class="footer-live">
+            <span class="dot" aria-hidden="true"></span>
+            Powering <b data-live="playing">0</b> players right now
+          </div>
+        </div>
+        <div>
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/team">Team</a></li>
+            <li><a href="#/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Games</h4>
+          <ul>
+            <li><a href="#/games">All games</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#" target="_blank" rel="noopener noreferrer" data-tiktok>TikTok</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer" data-discord>Discord</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bar container" style="padding-inline:0">
+        <p>&copy; <span data-year>2026</span> <span data-studio-name>Interactive Innovations</span>. All rights reserved.</p>
+        <p>Total visits: <b data-live="visits">0</b></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/roblox.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

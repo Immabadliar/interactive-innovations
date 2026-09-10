@@ -1,0 +1,46 @@
+{
+  "_comment": "Add a game by dropping in its Roblox place ID. universeId is optional (auto-resolved from placeId if omitted). Everything else - name, description, thumbnail, live players, visits, favorites - is pulled live from Roblox. slug must be unique and URL-safe. Set \"pinned\": true on exactly one game to make it the big hero card on the home page.",
+  "games": [
+    {
+      "slug": "clean-your-room",
+      "placeId": 80310980024153,
+      "universeId": 10418905860,
+      "category": "Casual",
+      "accent": "#5B86FF",
+      "featured": true
+    },
+    {
+      "slug": "betray",
+      "placeId": 119172539833595,
+      "universeId": 8134370211,
+      "category": "Survival",
+      "accent": "#FF5470",
+      "featured": true
+    },
+    {
+      "slug": "deep-clean-squishies",
+      "placeId": 118656463771310,
+      "universeId": 10480491636,
+      "category": "Simulation",
+      "accent": "#FF6EC7",
+      "featured": false
+    },
+    {
+      "slug": "duel-zone",
+      "placeId": 115918319079427,
+      "universeId": 10255377552,
+      "category": "Fighting",
+      "accent": "#FF8A3D",
+      "featured": false
+    },
+    {
+      "slug": "bloxrooms",
+      "placeId": 127943464865693,
+      "universeId": 10605173611,
+      "category": "Horror",
+      "accent": "#8A5BFF",
+      "featured": true,
+      "pinned": true
+    }
+  ]
+}
