@@ -1,0 +1,64 @@
+{
+  "roles": [
+    {
+      "id": "developer",
+      "title": "Developer",
+      "department": "Development Team",
+      "location": "Remote",
+      "type": "Contract",
+      "summary": "Help build and improve our Roblox experiences across gameplay, systems, interfaces, and live updates.",
+      "responsibilities": [
+        "Build and maintain player-facing features and internal systems",
+        "Turn ideas and prototypes into reliable, production-ready work",
+        "Debug and optimize experiences across devices",
+        "Collaborate with the rest of the team to ship updates"
+      ],
+      "requirements": [
+        "Experience in a development discipline relevant to Roblox games",
+        "A portfolio featuring strong development work",
+        "Clear communication and dependable follow-through",
+        "Comfort working independently on a remote team"
+      ]
+    },
+    {
+      "id": "growth-marketer",
+      "title": "Growth Marketer",
+      "department": "Marketing",
+      "location": "Remote",
+      "type": "Contract",
+      "summary": "Plan and run creative growth campaigns that turn game launches and updates into lasting player communities.",
+      "responsibilities": [
+        "Build launch and update marketing plans across social channels",
+        "Test creative, audiences, and messaging to improve acquisition",
+        "Track campaign performance and translate results into action",
+        "Coordinate with creators, developers, and community partners"
+      ],
+      "requirements": [
+        "Experience marketing games, entertainment, or creator-led products",
+        "Strong grasp of Roblox and short-form content culture",
+        "Comfort with analytics, experimentation, and reporting",
+        "Concise writing and proactive communication"
+      ]
+    },
+    {
+      "id": "content-creator",
+      "title": "Content Creator",
+      "department": "Marketing",
+      "location": "Remote",
+      "type": "Part-time",
+      "summary": "Create high-energy short-form content that makes players stop scrolling and start playing.",
+      "responsibilities": [
+        "Concept, capture, edit, and publish short-form game content",
+        "Turn updates, trends, and community moments into strong creative",
+        "Maintain a consistent posting rhythm and brand voice",
+        "Review performance and iterate on hooks, formats, and pacing"
+      ],
+      "requirements": [
+        "A portfolio of engaging TikTok, Shorts, or Reels content",
+        "Fast, confident video editing and storytelling skills",
+        "Deep familiarity with Roblox audiences and trends",
+        "Reliable turnaround and attention to detail"
+      ]
+    }
+  ]
+}

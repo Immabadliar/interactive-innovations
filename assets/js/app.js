@@ -12,6 +12,7 @@
     config: null,
     games: [],          // from games.json, enriched with live { detail, thumb, votes }
     team: [],
+    careers: [],
     gamesById: new Map(),
     ccuTimer: null,
     lastCcuUpdate: 0,
@@ -86,14 +87,16 @@
   }
 
   async function bootstrapData() {
-    const [config, gamesFile, teamFile] = await Promise.all([
+    const [config, gamesFile, teamFile, careersFile] = await Promise.all([
       loadJSON('data/config.json'),
       loadJSON('data/games.json'),
       loadJSON('data/team.json'),
+      loadJSON('data/careers.json'),
     ]);
     state.config = config;
     state.games = (gamesFile.games || []).map((g) => ({ ...g, detail: null, thumb: null, votes: null }));
     state.team = teamFile.team || [];
+    state.careers = careersFile.roles || [];
     state.gamesById = new Map(state.games.map((g) => [g.slug, g]));
     applyConfig();
   }
@@ -465,6 +468,49 @@
       </div>`;
     },
 
+    careers() {
+      const departments = ['Development Team', 'Marketing'];
+      return `
+      <section class="career-hero reveal">
+        <span class="eyebrow">Careers at <span data-studio-name></span></span>
+        <h1>Build experiences players come back to.</h1>
+        <p class="lead">Join a focused, remote Roblox team building, growing, and operating games with lasting communities.</p>
+        <a class="btn btn--primary" href="#/careers" data-career-scroll="open-roles">View ${state.careers.length} open roles <span aria-hidden="true">&darr;</span></a>
+      </section>
+      <section class="section careers-section" id="open-roles">
+        <header class="section__head reveal">
+          <div><span class="eyebrow">Open roles</span><h2>Find your place here.</h2></div>
+          <span class="pill"><span class="dot" aria-hidden="true"></span>${state.careers.length} roles &middot; Remote</span>
+        </header>
+        ${departments.map((department) => `
+          <div class="role-group reveal">
+            <div class="role-group__head"><h3>${esc(department)}</h3><span>${state.careers.filter((role) => role.department === department).length} openings</span></div>
+            <div class="role-list">
+              ${state.careers.filter((role) => role.department === department).map((role, index) => roleCard(role, index)).join('')}
+            </div>
+          </div>`).join('')}
+      </section>
+      <section class="section application-wrap" id="apply">
+        <div class="application-copy reveal">
+          <span class="eyebrow">Apply</span>
+          <h2>Let's make something great.</h2>
+          <p class="lead">Tell us about yourself and the work you want to do. We review every application.</p>
+        </div>
+        <form class="contact-form application-form reveal" id="career-form" action="${esc(state.config.contact.formspreeEndpoint)}" method="POST">
+          <input type="hidden" id="career-subject" name="_subject" value="New careers application">
+          <input type="hidden" name="application_type" value="Careers application">
+          <div class="field"><label for="career-role">Applying for</label><select id="career-role" name="role" required><option value="">Select a role</option>${state.careers.map((role) => `<option value="${esc(role.title)}">${esc(role.title)}</option>`).join('')}</select></div>
+          <div class="form-row"><div class="field"><label for="career-name">Name</label><input id="career-name" name="name" required autocomplete="name"></div><div class="field"><label for="career-email">Email</label><input id="career-email" type="email" name="email" required autocomplete="email"></div></div>
+          <div class="field"><label for="career-discord">Discord username</label><input id="career-discord" name="discord" required placeholder="username"></div>
+          <div class="field"><label for="career-portfolio">Portfolio or work samples</label><input id="career-portfolio" type="url" name="portfolio" required placeholder="https://"></div>
+          <div class="field"><label for="career-message">Why are you a great fit?</label><textarea id="career-message" name="message" rows="5" required></textarea></div>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+          <button class="btn btn--primary" type="submit" id="career-submit">Submit application</button>
+          <p class="form-status" id="career-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>`;
+    },
+
     contact() {
       const tag = state.config.contact.discordTag;
       return `
@@ -495,6 +541,22 @@
       <span class="statbar__label">${live ? liveDot() : ''}${label}</span>
       <span class="statbar__num" data-live="${key}">0</span>
     </div>`;
+  }
+
+  function roleCard(role, index) {
+    return `<article class="role-card" id="role-${esc(role.id)}">
+      <button class="role-card__summary" type="button" aria-expanded="false">
+        <span class="role-card__number">${String(index + 1).padStart(2, '0')}</span>
+        <span class="role-card__title"><b>${esc(role.title)}</b><small>${esc(role.summary)}</small></span>
+        <span class="role-card__meta"><span>${esc(role.location)}</span><span>${esc(role.type)}</span></span>
+        <span class="role-card__toggle" aria-hidden="true">+</span>
+      </button>
+      <div class="role-card__details">
+        <div><h4>What you'll do</h4><ul>${role.responsibilities.map((item) => `<li>${esc(item)}</li>`).join('')}</ul></div>
+        <div><h4>What you'll bring</h4><ul>${role.requirements.map((item) => `<li>${esc(item)}</li>`).join('')}</ul></div>
+        <a class="btn btn--primary role-apply" href="#/careers" data-career-scroll="apply" data-role="${esc(role.title)}">Apply for this role <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </article>`;
   }
 
   function teamCardSkeleton(m) {
@@ -593,13 +655,59 @@
     });
   }
 
+  function wireCareers() {
+    $$('[data-career-scroll]').forEach((link) => link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(link.dataset.careerScroll)?.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+    }));
+    $$('.role-card__summary').forEach((button) => button.addEventListener('click', () => {
+      const details = button.nextElementSibling;
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      button.closest('.role-card')?.classList.toggle('is-open', !open);
+      button.querySelector('.role-card__toggle').textContent = open ? '+' : '−';
+    }));
+    $$('.role-apply').forEach((link) => link.addEventListener('click', () => {
+      const select = $('#career-role');
+      if (select) select.value = link.dataset.role;
+    }));
+    const form = $('#career-form');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (form.querySelector('.hp').value) return;
+      const btn = $('#career-submit');
+      const status = $('#career-status');
+      const selectedRole = $('#career-role')?.value || 'Unknown role';
+      const subject = $('#career-subject');
+      if (subject) subject.value = `New application: ${selectedRole}`;
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      status.textContent = '';
+      status.className = 'form-status';
+      try {
+        const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+        if (!res.ok) throw new Error('Submission failed');
+        form.reset();
+        status.textContent = 'Application received. Thanks for taking the time to apply.';
+        status.classList.add('is-ok');
+        btn.textContent = 'Application sent ✓';
+      } catch {
+        status.textContent = 'Something went wrong. Please try again or reach us on Discord.';
+        status.classList.add('is-err');
+        btn.disabled = false;
+        btn.textContent = 'Submit application';
+      }
+    });
+  }
+
   /* ---------- router --------------------------------------------- */
   function parseRoute() {
     const h = location.hash.replace(/^#\/?/, '');
     const parts = h.split('/').filter(Boolean);
     if (!parts.length) return { name: 'home' };
     if (parts[0] === 'games' && parts[1]) return { name: 'game', slug: parts[1] };
-    if (['home', 'games', 'about', 'team', 'contact'].includes(parts[0])) return { name: parts[0] };
+    if (['home', 'games', 'about', 'team', 'careers', 'contact'].includes(parts[0])) return { name: parts[0] };
     return { name: 'notFound' };
   }
 
@@ -621,12 +729,13 @@
       hydrateTeam();
       wireGameFilters();
       wireContactForm();
+      wireCareers();
       updateNav(route);
     });
   }
 
   function updateNav(route) {
-    const map = { home: '#/', games: '#/games', game: '#/games', about: '#/about', team: '#/team', contact: '#/contact' };
+    const map = { home: '#/', games: '#/games', game: '#/games', about: '#/about', team: '#/team', careers: '#/careers', contact: '#/contact' };
     const target = map[route.name];
     $$('.nav__link').forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === target));
   }
